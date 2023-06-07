@@ -1,0 +1,22 @@
+.top {
+    height: 4rem;
+    margin-bottom: 1rem;
+    width: 27.25vw;
+    position: absolute;
+    right: 2rem;
+}
+
+.cont {
+    margin-top: 5rem;
+    height: 80.25vh;
+    padding: 2rem;
+    overflow-y: scroll;
+}
+
+.entry{
+    height: max-content;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}

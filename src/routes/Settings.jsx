@@ -2,6 +2,8 @@ import React from 'react'
 import styles from './Settings.module.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import SettingsDevice from '../components/SettingsDevice';
+import SettingsProfile from '../components/SettingsProfile';
 
 function Settings() {
   return (
@@ -15,10 +17,10 @@ function Settings() {
               id="uncontrolled-tab-example"
             >
               <Tab eventKey="edit-profile" title="Edit Profile">
-                <div className={`${styles.content} bg-light rounded-bottom`}>Edit Profile</div>
+                <SettingsProfile/>
               </Tab>
               <Tab eventKey="device" title="Device">
-                <div className={`${styles.content} bg-light rounded-bottom`}>Device</div>
+                <SettingsDevice/>
               </Tab>
             </Tabs>
         </section>

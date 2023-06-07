@@ -5,7 +5,7 @@
 .top{
     height: 4rem;
     margin-bottom: 1rem;
-    width: 35%;
+    width: 27.25vw;
     position: absolute;
     right: 2rem;
 }
@@ -15,5 +15,7 @@
 }
 
 .content{
+    padding-left: 1rem;
     height: 80vh;
+    /* display: flex; */
 }

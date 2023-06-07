@@ -1,0 +1,32 @@
+.cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.angles{
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+}
+
+.angleleft{
+    margin-right: 1rem;
+}
+
+.angleright{
+    margin-left: 1rem;
+}
+
+.angle{
+    padding: 0.75rem 1rem;
+    width: 15rem;
+    margin: 1rem 0;
+}
+
+.button{
+    border: none;
+    width: 15rem;
+    padding: 0.75rem 3rem;
+}

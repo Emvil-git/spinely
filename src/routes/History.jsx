@@ -9,8 +9,43 @@ function History() {
       <div className={`${styles.top} bg-light rounded`}>
         Profile
       </div>
-      <section className={`${styles.cont}`}>
-
+      <section className={`${styles.cont} bg-light rounded`}>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
+        <div className={`${styles.entry} border border-secondary rounded`}>
+          <span>History entry 1</span>
+          <span>4:20 PM</span>
+        </div>
       </section>
     </div>
   )
