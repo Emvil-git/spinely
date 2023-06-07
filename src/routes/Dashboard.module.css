@@ -1,0 +1,43 @@
+.main{
+    height: 100vh;
+    display: flex;
+}
+
+.top{
+    height: 4rem !important;
+    
+    margin-bottom: 1rem;
+}
+
+.left{
+    width: 65%;
+    padding-right: 2rem;
+}
+
+.leftcont{
+    display: flex;
+    flex-direction: column;
+    height: 88%;
+}
+
+.right{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.datasect{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1rem;
+    height: 100%;
+}
+
+.cont{
+    height: 100%;
+}
+
+.imgdiv{
+    margin-top: 1rem;
+}
