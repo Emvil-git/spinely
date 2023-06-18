@@ -36,6 +36,27 @@
 
 .cont{
     height: 100%;
+    background: white;
+}
+
+.observed{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    background-color: white;
+}
+
+.circle{
+    height: 10rem;
+    width: 10rem;
+    background-color: bisque;
+    border-radius: 20rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    place-content: center;
 }
 
 .imgdiv{

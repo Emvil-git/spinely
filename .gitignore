@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/spinely-be/node_modules
 /.pnp
 .pnp.js
 

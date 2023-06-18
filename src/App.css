@@ -6,12 +6,14 @@
 .page{
   width: 82vw;
   padding: 2rem;
+  background-color: #f0f7ee;
 }
 
 .settings{
   height: 80vh;
   width: 100%;
   padding: 1rem;
+  background-color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {

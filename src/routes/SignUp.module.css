@@ -1,22 +1,29 @@
-.cont {
+.main{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    background-color: #f0f7ee;
+    background-color: #274c77;
 }
 
-.input{
+.formcont{
+    padding: 2rem;
+}
+
+.input {
     padding: 0.75rem 1rem;
     width: 20rem;
     margin: 0.5rem;
 }
 
-.button{
+.button {
     padding: 0.75rem 1rem;
     width: 15rem;
     margin-top: 1.5rem;
-    background-color: #279af1 !important;
-    border: 1px solid #279af1 !important;
+}
+
+.tab{
+    width: 100% !important;
 }

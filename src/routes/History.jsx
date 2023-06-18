@@ -1,13 +1,24 @@
 import React from 'react'
 import styles from './History.module.css';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import Profile from '../components/Profile';
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
+import { useEffect } from 'react';
 
 function History() {
+  const {user} = useAppContext();
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+      if(!user){
+          navigate('/login');
+      }
+  },[user])
+
   return (
-    <div className={`${styles.main} bg-secondary page`}>
+    <div className={`${styles.main} page`}>
       <div className={`${styles.top} bg-light rounded`}>
-        Profile
+        <Profile/>
       </div>
       <section className={`${styles.cont} bg-light rounded`}>
         <div className={`${styles.entry} border border-secondary rounded`}>

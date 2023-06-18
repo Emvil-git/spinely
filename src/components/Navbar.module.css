@@ -1,20 +1,39 @@
 .nav{
   height: 100vh;
   width: 18vw;
+  background-color: #274c77;
 }
 
 .brand{
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 .link{
     list-style: none;
-
     font-size: 1.25rem;
-
+    transition: 0.3s;
+    cursor: pointer;
     &:hover{
         background-color: #fefefe30;
     }
+}
+
+.logout{
+    font-size: 1.25rem;
+    transition: 0.3s;
+    color: #ffffff67;
+    cursor: pointer;
+    &:hover{
+        color: white;
+    }
+}
+
+.current{
+    list-style: none;
+    font-size: 1.25rem;
+    background-color: #fefefe;
+    color: #121212 !important;
 }
 
 .icon{
