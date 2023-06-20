@@ -50,7 +50,7 @@ const addSession = async (req, res, next) => {
 const clearSessions = async (req, res, next) => {
     logging.info(NAMESPACE, 'Clear spine data');
 
-    const userId = auth.decode(req.headers.authorization).userId;
+    const userId = decode(req.headers.authorization).userId;
 
     let query = `DELETE FROM sessions WHERE userId=${userId};`;
 
@@ -87,7 +87,7 @@ const clearSessions = async (req, res, next) => {
 const getUserSessions = async (req, res, next) => {
     logging.info(NAMESPACE, 'Get User sessions');
 
-    const userId = auth.decode(req.headers.authorization).userId;
+    const userId = decode(req.headers.authorization).userId;
 
     let query = `SELECT * FROM sessions WHERE userId=${userId};`;
 

@@ -197,9 +197,9 @@ const editUserInfo = (req, res) => {
 
     const userInfo = decode(req.headers.authorization);
 
-    let { name, username, email, password } = req.body;
+    let { name, username, email } = req.body;
 
-    const query = `UPDATE users SET name="${name}" username="${username}" email="${email}" password="${ bcrypt.hashSync(password, 5)}" WHERE userId=${userInfo.userId}`;
+    const query = `UPDATE users SET name="${name}", username="${username}", email="${email}" WHERE userId=${userInfo.userId}`;
 
     Connect()
     .then(connection => {
@@ -231,4 +231,83 @@ const editUserInfo = (req, res) => {
     })
 };
 
-export default { signUp, getAllUsers, logIn, checkIfUsernameExists, editUserInfo, getName };
+const getUserInfo = (req, res) => {
+    logging.info(NAMESPACE, 'get user info');
+
+    const userInfo = decode(req.headers.authorization);
+
+    let query = `SELECT * FROM users WHERE userId = ${userInfo.userId}`;
+
+    Connect()
+    .then(connection => {
+        Query(connection, query)
+        .then(results => {
+            return res.status(200).json({
+                results
+            });
+        })
+        .catch(error => {
+            logging.error(NAMESPACE, error.message, error);
+
+            return res.status(500).json({
+            message: error.message,
+            error
+            })
+        })
+        .finally(() => {
+            connection.end();
+        })
+    })
+    .catch(error => {
+        logging.error(NAMESPACE, error.message, error);
+
+        return res.status(500).json({
+            message: error.message,
+            error
+        })
+    })
+};
+
+const refreshToken = async (req, res, next) => {
+    logging.info(NAMESPACE, 'Refresh Token');
+
+    const userInfo = decode(req.headers.authorization);
+
+    let query = `SELECT * FROM users WHERE userId = ${userInfo.userId}`;
+
+     Connect()
+    .then(connection => {
+        Query(connection, query)
+        .then((result, error) => {
+            const user =result[0]
+
+            const token = createAccessToken(user);
+
+            return res.status(200).json({
+                    access: token
+            });
+        }
+        )
+        .catch(error => {
+            logging.error(NAMESPACE, error.message, error);
+
+            return res.status(404).json({
+            message: error.message,
+            error
+            })
+        })
+        .finally(() => {
+            connection.end();
+        })
+    })
+    .catch(error => {
+        logging.error(NAMESPACE, error.message, error);
+
+        return res.status(500).json({
+            message: error.message,
+            error
+        })
+    })
+};
+
+export default { signUp, getAllUsers, logIn, checkIfUsernameExists, editUserInfo, getName, getUserInfo, refreshToken };

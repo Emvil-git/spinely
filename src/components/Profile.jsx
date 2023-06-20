@@ -8,7 +8,8 @@ function Profile() {
   const [name, setName] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:4000/users/name`, {
+    if(user){
+      fetch(`http://localhost:4000/users/name`, {
       headers: {
         Authorization: `Bearer ${user.access}`
       }
@@ -16,7 +17,8 @@ function Profile() {
     .then(data => {
       setName(data.name)
     })
-  }, [])
+    }
+  }, [user])
 
   return (
     <div className={styles.profile}>

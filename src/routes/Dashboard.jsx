@@ -2,6 +2,7 @@ import styles from './Dashboard.module.css';
 import Profile from '../components/Profile';
 import Calendar from 'react-calendar';
 import SessionDay from './SessionDay';
+import CircProgBar from '../components/ProgressBar';
 import { useAppContext } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -35,8 +36,7 @@ export default function Dashboard() {
                     <div className={`${styles.cont} rounded`}><Calendar/></div>
                     <div className={`${styles.cont} ${styles.imgdiv} rounded`}>
                         <div className={`${styles.observed} rounded`}>
-                            <div className={styles.circle}>90%</div>
-                            <span>Proper posture observed</span>
+                            <CircProgBar/>
                         </div>
                     </div>
                 </section>

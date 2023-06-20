@@ -7,7 +7,7 @@ import { useAppContext } from '../context/AppContext';
 export default function Navbar() {
     const navigate = useNavigate();
     const [currentRoute, setCurrentRoute] =useState('/')
-    const {user, setUser, calibration, setCalibration} = useAppContext();
+    const {user, setUser, calibration, setCalibration, history, setHistory, progress, setProgress} = useAppContext();
 
     // check if calibration data exists
     useEffect(()=>{
@@ -37,6 +37,43 @@ export default function Navbar() {
         }
     }, [user])
 
+    useEffect(() => {
+        if(user){
+            console.log(user)
+            fetch(`http://localhost:4000/session/get`, {
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).access}`
+                }
+            }).then(res => res.json())
+            .then(
+                data => {
+                    setHistory(data.result);
+                    console.log(data.result);
+                }
+            )
+        }
+    },[user])
+
+    useEffect(() => {
+        if(user){
+            if(history.length) {
+                const historyIds = history.map(entry => {return entry.sessionId});
+                const latestId = Math.max(...historyIds);
+
+                console.log(latestId)
+
+                fetch(`http://localhost:4000/progress/get/${latestId}`).then(res => res.json())
+                .then(
+                    data => {
+                        setProgress(data.result);
+                        console.log(data.result);
+                    }
+                )
+            }
+        }
+    },[user, history])
+
+
     const highlightRoute = (route) => {
         if(currentRoute === route) {
             return `${styles.current} text-align-left px-5 py-3 text-dark rounded`
@@ -53,6 +90,7 @@ export default function Navbar() {
     const logOut = (ev) => {
         ev.preventDefault();
 
+        navigate("/");
         setUser(null);
         setCalibration(null);
         localStorage.removeItem('user');
