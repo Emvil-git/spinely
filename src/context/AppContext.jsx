@@ -7,9 +7,10 @@ export const AppContextProvider = ({ children }) => {
     const [history, setHistory] = useState([]);
     const [progress, setProgress] = useState([]);
     const [calibration, setCalibration] = useState(JSON.parse(localStorage.getItem('calibration')));
+    const [name, setName] = useState('');
 
     return (
-        <AppContext.Provider value={{user,setUser, history, setHistory, calibration, setCalibration}}>
+        <AppContext.Provider value={{user,setUser, history, setHistory, calibration, setCalibration, name, setName, progress, setProgress}}>
             {children}
         </AppContext.Provider>
     )

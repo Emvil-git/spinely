@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 export default function Dashboard() {
-    const {user, calibration, setCalibration} = useAppContext();
+    const {user, calibration, setCalibration, progress, name} = useAppContext();
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -17,15 +17,24 @@ export default function Dashboard() {
         }
     },[user])
 
+    const displayProgress = () => {
+        if (progress.length) {
+            return progress.map((entry, index) => <SessionDay index={index} reportData={entry}/>)
+        } else {
+            return <span>No progress reports available</span>
+        }
+    }
+
     return (
         <div className={`${styles.main} page`}>
             <section className={`${styles.left}`}>
-                <h2 className={`${styles.top}`}>hello</h2>
+                <h2 className={`${styles.top}`}>Hello, <span className={styles.name}>{name.split(' ')[0]}</span></h2>
                 <section className={`${styles.leftcont}`}>
+                    {/* <SessionDay/>
                     <SessionDay/>
                     <SessionDay/>
-                    <SessionDay/>
-                    <SessionDay/>
+                    <SessionDay/> */}
+                    {displayProgress()}
                 </section>
             </section>
             <section className={`${styles.right}`}>

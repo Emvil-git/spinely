@@ -5,7 +5,7 @@
 
 .top{
     height: 4rem !important;
-    
+    font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
@@ -61,4 +61,8 @@
 
 .imgdiv{
     margin-top: 1rem;
+}
+
+.name{
+    font-weight: bold;
 }

@@ -4,8 +4,7 @@ import { useAppContext } from '../context/AppContext';
 import { useEffect } from 'react';
 
 function Profile() {
-  const {user} = useAppContext();
-  const [name, setName] = useState('');
+  const {user, name, setName} = useAppContext();
 
   useEffect(() => {
     if(user){

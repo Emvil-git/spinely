@@ -1,12 +1,16 @@
 .main{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .textcont{
     position: absolute;
     left: 0;
     right: 0;
-    top: 40px;
+    top: 50px;
     margin: auto;
 
     display: flex;
@@ -17,4 +21,10 @@
 .progBar{
     transform-origin: center;
     transform: rotate(270deg);
+}
+
+.score{
+    font-size: 2.5rem;
+    font-weight: 600;
+    cursor: default;
 }
