@@ -93,6 +93,7 @@ function SignUp() {
             text: "Welcome!"
           })
 
+          localStorage.setItem('user', JSON.stringify(data))
           setUser(data);
           navigate('/')
         } else {
@@ -111,7 +112,7 @@ function SignUp() {
       <div>
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className={`${styles.tabs} nav-fill`}>
         <Tab eventKey="signup" title="Sign Up" className={`${styles.tab}`}>
-          <section className={`${styles.formcont} bg-secondary rounded-bottom`}>
+          <section className={`${styles.formcont} rounded-bottom`}>
             <Form onSubmit={signUp} className='text-center'>
                 <Form.Control className={`${styles.input}`} onChange={(ev) => {setSignName(ev.target.value)}} required value={signName} type="text" placeholder="New name" />
                 <Form.Control className={`${styles.input}`} onChange={(ev) => {setSignUsername(ev.target.value)}} required value={signUsername} type="text" placeholder="New username" />
@@ -124,7 +125,7 @@ function SignUp() {
           </section>
         </Tab>
         <Tab eventKey="profile" title="Sign In" className={`${styles.tab}`}>
-          <section className={`${styles.formcont} bg-secondary rounded-bottom`}>
+          <section className={`${styles.formcont} rounded-bottom`}>
             <Form onSubmit={logIn} className='text-center'>
                 <Form.Control className={`${styles.input}`} onChange={(ev) => {setLoginUsername(ev.target.value)}} required value={loginUsername} type="text" placeholder="Username" />
                 <Form.Control className={`${styles.input}`} onChange={(ev) => {setLoginPassword(ev.target.value)}} required value={loginPassword} type="password" placeholder="Passsword" />

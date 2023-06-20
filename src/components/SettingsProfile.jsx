@@ -10,9 +10,9 @@ function SettingsProfile() {
         <section className={`${styles.cont} rounded`}>
             <p>Enter corresponding details to update your profile</p>
             <Form className='text-center'>
-                <Form.Control className={`${styles.input}`} type="email" placeholder="New name" />
-                <Form.Control className={`${styles.input}`} type="password" placeholder="New username" />
-                <Form.Control className={`${styles.input}`} type="password" placeholder="New email" />
+                <Form.Control className={`${styles.input}`} type="text" placeholder="New name" />
+                <Form.Control className={`${styles.input}`} type="text" placeholder="New username" />
+                <Form.Control className={`${styles.input}`} type="email" placeholder="New email" />
                 <Form.Control className={`${styles.input}`} type="password" placeholder="New password" />
               <Button className={styles.button} type="submit">
                 Update Profile

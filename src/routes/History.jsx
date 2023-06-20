@@ -15,6 +15,10 @@ function History() {
       }
   },[user])
 
+  useEffect(() => {
+    
+  })
+
   return (
     <div className={`${styles.main} page`}>
       <div className={`${styles.top} bg-light rounded`}>
