@@ -140,7 +140,7 @@ function SettingsDevice() {
         </section>
         <section className={`d-flex justify-content-around w-50`}>
           <button className={`${styles.button} rounded text-light`}>Calibrate</button>
-          <button onClick={saveCalibration} className={`${styles.button} ${styles.btn_outline} rounded border-dark text-dark`}>Save Calibration</button>
+          {/* <button onClick={saveCalibration} className={`${styles.button} ${styles.btn_outline} rounded border-dark text-dark`}>Save Calibration</button> */}
         </section>
       </div>
     </div>
