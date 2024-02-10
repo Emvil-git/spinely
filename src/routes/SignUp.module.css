@@ -8,6 +8,10 @@
     background-color: #274c77;
 }
 
+.main .nav-link{
+    color: white !important;
+}
+
 .formcont{
     padding: 2.5rem 3.5rem;
     background-color: #f0f7ee;
@@ -23,8 +27,10 @@
     padding: 1rem 2rem !important;
     width: 15rem;
     margin-top: 2rem;
+    background: #274c77 !important;
+    font-size: 18px !important;
 }
-/* 
-.tab{
-    width: 100% !important;
-} */
+
+.tabLogin{
+    color: white !important;
+}
