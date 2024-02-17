@@ -53,44 +53,10 @@ export default function Navbar() {
                 data => {
                     setHistory(data.result);
                     console.log(data.result);
-
-                    const isSessionStartedToday = history.some(entry => {
-                        const entryDate = new Date(entry.createdAt);
-                        const today = new Date();
-        
-                        return (
-                            entryDate.getDate() === today.getDate() &&
-                            entryDate.getMonth() === today.getMonth() &&
-                            entryDate.getFullYear() === today.getFullYear()
-                        );
-                    });
-                    if (!isSessionStartedToday) {
-                        const latestSessionNumber = Math.max(...history.map(entry => entry.sessionId));
-                        const newSessionNumber = latestSessionNumber + 1;
-
-                        fetch(`http://localhost:4000/session/updateSessionId`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).access}`
-                            },
-                            body: JSON.stringify({
-                                newSessionNumber: newSessionNumber
-                            })
-                        }).then(res => res.json())
-                        .then(data => {
-                        });
-
-                        setHistory(prevHistory => [
-                            ...prevHistory,
-                            {
-                                // to add session data
-                            }
-                        ]);
-                    }
-                });
-            }
-    }, [user]);
+                }
+            )
+        }
+    },[user])
 
     useEffect(() => {
         if(user){
