@@ -5,6 +5,8 @@ import { decode } from '../auth.js';
 
 const NAMESPACE = "Session";
 
+// changes can be discarded back, not related to monitoring button added feature
+
 const addSession = async (req, res, next) => {
     logging.info(NAMESPACE, 'add session');
 
