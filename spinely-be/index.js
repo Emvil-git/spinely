@@ -5,6 +5,7 @@ import logging from './config/logging.js';
 import config from './config/config.js';
 import cors from 'cors';
 import usersRouter from './routes/users.js';
+import testRouter from './routes/users2.js';
 import calibrationRouter from './routes/calibration.js';
 import sessionRouter from './routes/session.js';
 import progressRouter from './routes/progress.js';
@@ -46,6 +47,7 @@ app.use("/users", usersRouter);
 app.use("/calibration", calibrationRouter);
 app.use("/session", sessionRouter);
 app.use("/progress", progressRouter);
+app.use("/test", testRouter);
 
 /** Error handling */
 app.use((req, res, next) => {
