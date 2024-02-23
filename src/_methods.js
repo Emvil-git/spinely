@@ -85,3 +85,24 @@ export const convertDate = (isoString) => {
     const fTime = `${hours}:${minutes}:${seconds}`;
     return `${fDate} ${fTime}`;
 }
+
+
+// Index Generators
+
+export const generateSessionIndex = (sessionIndex) => {
+    let indStr = sessionIndex.toString();
+    indStr = '10' + indStr;
+    return parseInt(indStr);
+}
+
+export const generateMonitoringIndex = (monIndex) => {
+    let indStr = monIndex.toString();
+    indStr = '20' + indStr;
+    return parseInt(indStr);
+}
+
+export const generateProgressIndex = (progIndex) => {
+    let indStr = progIndex.toString();
+    indStr = '30' + indStr;
+    return parseInt(indStr);
+}

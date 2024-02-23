@@ -39,7 +39,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use(cors);
+app.use(cors);
 
 /** Routes go here */
 app.use("/users", usersRouter);
