@@ -1,8 +1,11 @@
 import logging from '../config/logging.js';
 import { Connect, Query } from '../config/mysql.js';
 import { decode } from '../auth.js';
+import sqlite from 'sqlite3';
+import {msgInsertOne} from '../config/message.js';
 
 const NAMESPACE = "Calibration";
+const db = new sqlite.Database("../spinely_db.db");
 
 const createCalibrationData = async (req, res, next) => {
     logging.info(NAMESPACE, 'Create calibration data');
@@ -16,34 +19,24 @@ const createCalibrationData = async (req, res, next) => {
      console.log(req.body);
      console.log(query);
 
-    //  Connect()
-    // .then(connection => {
-    //     Query(connection, query)
-    //     .then(result => {
-    //             return res.status(200).json({
-    //                 result
-    //             });
-    //         })
-    //     .catch(error => {
-    //         logging.error(NAMESPACE, error.message, error);
+    db.run(query, error => {
+        if (error) {
+            logging.error(NAMESPACE, error.message, error);
+            return res.status(500).json(
+                {
+                    message: error.message
+                }
+            )
+        } else {
+            return res.status(200).json(
+                {
+                    message: msgInsertOne(NAMESPACE, this.lastID)
+                }
+            )
+        }
+    })
 
-    //         return res.status(500).json({
-    //         message: error.message,
-    //         error
-    //         })
-    //     })
-    //     .finally(() => {
-    //         connection.end();
-    //     })
-    // })
-    // .catch(error => {
-    //     logging.error(NAMESPACE, error.message, error);
-
-    //     return res.status(500).json({
-    //         message: error.message,
-    //         error
-    //     })
-    // })
+    return db.close();
 };
 
 const checkIfCalibrationExists = (req, res) => {
