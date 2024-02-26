@@ -35,6 +35,7 @@ export default function Dashboard() {
                     <SessionDay/>
                     <SessionDay/> */}
                     {displayProgress()}
+                    {/* Add line graph here */}
                 </section>
             </section>
             <section className={`${styles.right}`}>
@@ -46,6 +47,7 @@ export default function Dashboard() {
                     <div className={`${styles.cont} ${styles.imgdiv} rounded`}>
                         <div className={`${styles.observed} rounded`}>
                             <CircProgBar/>
+                            {/* TODO: Labels and dates */}
                         </div>
                     </div>
                 </section>

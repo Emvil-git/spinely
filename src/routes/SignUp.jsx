@@ -111,7 +111,7 @@ function SignUp() {
     <div className={`${styles.main}`}>
       <div>
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className={`${styles.tabs} nav-fill`}>
-        <Tab eventKey="signup" title="Sign Up" className={`${styles.tab}`}>
+        <Tab eventKey="signup" title="Sign Up" className={`${styles.tab} ${styles.tabLogin}`}>
           <section className={`${styles.formcont} rounded-bottom`}>
             <Form onSubmit={signUp} className='text-center'>
                 <Form.Control className={`${styles.input}`} onChange={(ev) => {setSignName(ev.target.value)}} required value={signName} type="text" placeholder="New name" />
@@ -124,11 +124,11 @@ function SignUp() {
             </Form>
           </section>
         </Tab>
-        <Tab eventKey="profile" title="Sign In" className={`${styles.tab}`}>
+        <Tab eventKey="profile" title="Sign In" className={`${styles.tab} ${styles.tabLogin}`}>
           <section className={`${styles.formcont} rounded-bottom`}>
             <Form onSubmit={logIn} className='text-center'>
                 <Form.Control className={`${styles.input}`} onChange={(ev) => {setLoginUsername(ev.target.value)}} required value={loginUsername} type="text" placeholder="Username" />
-                <Form.Control className={`${styles.input}`} onChange={(ev) => {setLoginPassword(ev.target.value)}} required value={loginPassword} type="password" placeholder="Passsword" />
+                <Form.Control className={`${styles.input}`} onChange={(ev) => {setLoginPassword(ev.target.value)}} required value={loginPassword} type="password" placeholder="Password" />
               <Button className={styles.button} variant="primary" type="submit">
                 Sign In
               </Button>
