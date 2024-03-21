@@ -2,15 +2,15 @@ import logging from '../config/logging.js';
 import { Connect, Query } from '../config/mysql.js';
 import { decode } from '../auth.js';
 import sqlite from 'sqlite3';
-import {msgInsertOne} from '../config/message.js';
+import {msgInsertOne, msgGen} from '../config/message.js';
 
 const NAMESPACE = "Calibration";
-const db = new sqlite.Database("../spinely_db.db");
 
 const createCalibrationData = async (req, res, next) => {
     logging.info(NAMESPACE, 'Create calibration data');
 
     const userId = decode(req.headers.authorization).userId;
+    const db = new sqlite.Database("../spinely_db.db");
 
     let { cervical_angle_min, cervical_angle_max, cervical_angle_avg, thoracic_angle_min, thoracic_angle_max,  thoracic_angle_avg, lumbar_angle_min, lumbar_angle_max, lumbar_angle_avg, left_midAxLine_angle_min, left_midAxLine_angle_max, left_midAxLine_angle_avg, right_midAxLine_angle_min, right_midAxLine_angle_max,  right_midAxLine_angle_avg,  calibration_timestamp } = req.body;
 
@@ -44,43 +44,35 @@ const checkIfCalibrationExists = (req, res) => {
 
     const userId = decode(req.headers.authorization).userId;
 
+    const db = new sqlite.Database("../spinely_db.db");
     let query = `SELECT * FROM device_calibration WHERE userId = ${userId}`;
 
-    Connect() // Connect fxn for mysql
-    .then(connection => {
-        Query(connection, query)
-        .then(results => { // then stuff for when query successful
-
-            if (results[0]){
-                return res.status(200).json({
-                    calibrationExists: true
-                });
+    db.get(query, (err, row) => {
+        if (err) {
+            logging.error(NAMESPACE, err.message, err);
+            return res.status(500).json(
+                {
+                    message: err.message
+                }
+            )
+        } else {
+            if (row === undefined || row.length(0)){
+                return res.status(200).json(
+                    {
+                        calibrationExists: false
+                    }
+                )
             } else {
-                return res.status(200).json({
-                    calibrationExists: false
-                });
+                return res.status(200).json(
+                    {
+                        calibrationExists: true
+                    }
+                )
             }
-        })
-        .catch(error => {
-            logging.error(NAMESPACE, error.message, error);
-
-            return res.status(500).json({
-            message: error.message,
-            error
-            })
-        })
-        .finally(() => {
-            connection.end(); // still have to end the connection here
-        })
+        }
     })
-    .catch(error => {
-        logging.error(NAMESPACE, error.message, error);
 
-        return res.status(500).json({
-            message: error.message,
-            error
-        })
-    })
+    return db.close();
 };
 
 const clearCalibrationData = async (req, res, next) => {
@@ -88,36 +80,27 @@ const clearCalibrationData = async (req, res, next) => {
 
     const userId = decode(req.headers.authorization).userId;
 
+    const db = new sqlite.Database("../spinely_db.db");
     let query = `DELETE FROM device_calibration WHERE userId=${userId};`;
 
-     Connect()
-    .then(connection => {
-        Query(connection, query)
-        .then(result => {
-                return res.status(200).json({
-                    result
-                });
-            })
-        .catch(error => {
+    db.run(query, error => {
+        if (error) {
             logging.error(NAMESPACE, error.message, error);
-
-            return res.status(500).json({
-            message: error.message,
-            error
-            })
-        })
-        .finally(() => {
-            connection.end();
-        })
+            return res.status(500).json(
+                {
+                    message: error.message
+                }
+            )
+        } else {
+            return res.status(200).json(
+                {
+                    message: msgGen(NAMESPACE, this.changes)
+                }
+            )
+        }
     })
-    .catch(error => {
-        logging.error(NAMESPACE, error.message, error);
 
-        return res.status(500).json({
-            message: error.message,
-            error
-        })
-    })
+    return db.close();
 }
 
 const getUserCalibration = async (req, res, next) => {
@@ -125,36 +108,47 @@ const getUserCalibration = async (req, res, next) => {
 
     const userId = decode(req.headers.authorization).userId;
 
+    const db = new sqlite.Database("../spinely_db.db");
     let query = `SELECT * FROM device_calibration WHERE userId=${userId};`;
 
-     Connect()
-    .then(connection => {
-        Query(connection, query)
-        .then(result => {
-                return res.status(200).json({
-                    result
-                });
-            })
-        .catch(error => {
-            logging.error(NAMESPACE, error.message, error);
-
-            return res.status(500).json({
-            message: error.message,
-            error
-            })
-        })
-        .finally(() => {
-            connection.end();
-        })
+    db.get(query, (error, row) => {
+        if (error) {
+            return res.status(500).json(
+                {
+                    message: error.message
+                }
+            )
+        } else {
+            if (row) {
+                return res.status(200).json(
+                    {
+                        data:{
+                            calibrationId : row.calibrationId,
+                            userId : row.userId,
+                            upback_min : row.upback_min,
+                            upback_max : row.upback_max,  
+                            midback_min : row.midback_min,  
+                            midback_max : row.midback_max,  
+                            lowback_min : row.upback_min,  
+                            lowback_max : row.upback_min, 
+                            left_min : row.left_min, 
+                            left_max : row.left_max, 
+                            right_min : row.right_min, 
+                            right_max : row.right_max, 
+                        }
+                    }
+                )
+            } else {
+                return res.status(200).json(
+                    {
+                        data:{}
+                    }
+                )
+            }
+        }
     })
-    .catch(error => {
-        logging.error(NAMESPACE, error.message, error);
 
-        return res.status(500).json({
-            message: error.message,
-            error
-        })
-    })
+    return db.close();
 }
 
 const updateCalibrationData = async (req, res, next) => {
