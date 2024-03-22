@@ -1,8 +1,6 @@
 import styles from  './ProgressBar.module.css';
 
-function CircProgBar () {
-
-    const scoreVal = 90;
+function CircProgBar ({scoreVal,textVal}) {
 
     const progRad = 72;
     const progCirc = 452.389;
@@ -25,9 +23,9 @@ function CircProgBar () {
             fill="none"/>
         </svg>
         <section className={styles.textcont}>
-            <span className={styles.score}>{`${scoreVal}%`}</span>
+            <span className={styles.score}>{`${scoreVal.toFixed(1)}%`}</span>
         </section>
-        <span className='pt-3'>Proper Posture Observed</span>
+        <span className='pt-3'>{textVal}</span>
     </div>
     )
 }
