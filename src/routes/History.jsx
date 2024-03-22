@@ -1,58 +1,94 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect } from 'react';
 import styles from './History.module.css';
 import Profile from '../components/Profile';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
 function History() {
-  const {user, history} = useAppContext();
+  const { user, history } = useAppContext();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-      if(!user){
-          navigate('/login');
-      }
-  },[user])
-
-  // useEffect(() => {
-    
-  // })
-
-  const showHistory = () => {
-    if (history.length > 0) {
-      return history.map(data => <HistoryEntry historyData={data}/>)
-    } else {
-      return <span>No sessions found for this user</span>
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
     }
-  }
+  }, [user]);
 
   return (
     <div className={`${styles.main} page`}>
+      {/* User profile */}
       <div className={`${styles.top} bg-light rounded`}>
-        <Profile/>
+        <Profile />
       </div>
+      {/* History entries */}
       <section className={`${styles.cont} bg-light rounded`}>
-        {/* <div className={`${styles.entry} border border-secondary rounded`}>
-          <span>History entry 1</span>
-          <span>4:20 PM</span>
-        </div>
-        <HistoryEntry/> */}
-        {showHistory()}
+        {history.length > 0 && history.map((data, index) => <HistoryEntry key={data.id} historyData={data} sessionNumber={index + 1} />)}
       </section>
     </div>
-  )
+  );
 }
 
-function HistoryEntry({historyData}) {
+function HistoryEntry({ historyData, sessionNumber }) {
+  if (!historyData || historyData.percent_proper === undefined) {
+    return (
+      <div className={`${styles.noRecords} bg-light rounded d-flex justify-content-center align-items-center`}>
+        <span>No records in this part. Start monitoring to add an entry.</span>
+      </div>
+    );
+  }
+
+  if (historyData.percent_proper === null) {
+    return (
+      <div className={`${styles.entry} border border-secondary rounded`}>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <span className="fw-bold">Session {getOrdinal(sessionNumber)}</span>
+          <span className="ms-3">{formatSessionDuration(historyData.date_start, historyData.date_end)}</span>
+        </div>
+      </div>
+    );    
+  }
   return (
     <div className={`${styles.entry} border border-secondary rounded`}>
-      <span>{`You maintained proper posture ${historyData.percent_proper}% of the time`}</span>
-      <section className='d-flex text-bold'>
-        <span className='me-3'>{historyData.time_start}</span>
-        <span>{historyData.time_end}</span>
-      </section>
+      {/* Display session number and duration */}
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <span className="fw-bold">Session {getOrdinal(sessionNumber)}</span>
+        <span className="ms-3">{formatSessionDuration(historyData.date_start, historyData.date_end)}</span> {/* Add margin between session number and duration */}
+      </div>
+      {/* Display percentage of proper posture */}
+      <span>You maintained proper posture {historyData.percent_proper.toFixed(2)}% of the time. <a href="#">See more...</a></span>
     </div>
-  )
+  );
 }
 
-export default History
+function formatSessionDuration(start, end) {
+  const startDate = new Date(start);
+  let endDate;
+  let endFormatted;
+
+  if (end === null) {
+    endFormatted = "Present";
+  } else {
+    endDate = new Date(end);
+    endFormatted = endDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+  }
+
+  const startFormatted = startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+  const endFormattedTimeOnly = endDate ? endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) : '';
+
+  if (endFormatted === "Present" || startDate.toDateString() === endDate.toDateString()) {
+    if (startDate.toDateString() === endDate.toDateString() && startDate.getTime() !== endDate.getTime()) {
+      return `${startFormatted} - ${endFormattedTimeOnly}`;
+    } else {
+      return `${startFormatted} - ${endFormatted}`;
+    }
+  } else {
+    return `${startFormatted} - ${endFormatted}`;
+  }
+}
+
+function getOrdinal(n) {
+  return `${n}`;
+}
+
+
+export default History;

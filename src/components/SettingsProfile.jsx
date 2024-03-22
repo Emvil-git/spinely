@@ -10,6 +10,8 @@ function SettingsProfile() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  // add for user's password
+  // add height, torso length, chest measurement, waist measurement
 
   useEffect(() => {
     fetch(`http://localhost:4000/users/getInfo`, {
@@ -24,7 +26,7 @@ function SettingsProfile() {
       setEmail(userData.email);
     })
   }, [])
-
+ 
   const updateUserInfo = (ev) => {
     ev.preventDefault();
 
@@ -72,19 +74,55 @@ function SettingsProfile() {
 
   return (
     <div className='settings rounded'>
-        <section className={`${styles.cont} rounded`}>
-            <p>Enter corresponding details to update your profile</p>
-            <Form onSubmit={updateUserInfo} className='text-center'>
-                <Form.Control className={`${styles.input}`} type="text" value={name} onChange={(ev) => {setName(ev.target.value)}}placeholder="New name" required/>
-                <Form.Control className={`${styles.input}`} type="text" value={username}  onChange={(ev) => {setUsername(ev.target.value)}} placeholder="New username" required/>
-                <Form.Control className={`${styles.input}`} type="email" value={email}  onChange={(ev) => {setEmail(ev.target.value)}} placeholder="New email" required/>
-              <Button className={styles.button} type="submit">
-                Update Profile
-              </Button>
-            </Form>
-        </section>
+      <section className={`${styles.cont} rounded`}>
+        {/* <p>Enter corresponding details to update your profile</p> */}
+        <Form onSubmit={updateUserInfo} className='text-center'>
+          <Form.Group className='mb-3 row'>
+            <Form.Label className={`col-sm-3 text-end ${styles.label}`}>Name:</Form.Label>
+            <div className='col-sm-9'>
+              <Form.Control 
+                className={`${styles.input}`} 
+                type="text" 
+                value={name} 
+                onChange={(ev) => {setName(ev.target.value)}}
+                placeholder="New name" 
+                required
+              />
+            </div>
+          </Form.Group>
+          <Form.Group className='mb-3 row'>
+            <Form.Label className={`col-sm-3 text-end ${styles.label}`}>Username:</Form.Label>
+            <div className='col-sm-9'>
+              <Form.Control 
+                className={`${styles.input}`} 
+                type="text" 
+                value={username}  
+                onChange={(ev) => {setUsername(ev.target.value)}}
+                placeholder="New username" 
+                required
+              />
+            </div>
+          </Form.Group>
+          <Form.Group className='mb-3 row'>
+            <Form.Label className={`col-sm-3 text-end ${styles.label}`}>Email:</Form.Label>
+            <div className='col-sm-9'>
+              <Form.Control 
+                className={`${styles.input}`} 
+                type="email" 
+                value={email}  
+                onChange={(ev) => {setEmail(ev.target.value)}}
+                placeholder="New email" 
+                required
+              />
+            </div>
+          </Form.Group>
+          <Button className={styles.button} type="submit">
+            Update Profile
+          </Button>
+        </Form>
+      </section>
     </div>
-  )
+  )      
 }
 
 export default SettingsProfile

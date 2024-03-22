@@ -8,15 +8,23 @@
 
 .cont {
     margin-top: 5rem;
-    height: 80.25vh;
+    height: calc(100vh - 6rem);
     padding: 2rem;
     overflow-y: scroll;
 }
 
-.entry{
-    height: max-content;
+.entry {
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
+    border: 1px solid #ccc;
+}
+
+.noRecords {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
