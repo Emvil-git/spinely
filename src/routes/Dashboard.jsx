@@ -50,6 +50,19 @@ export default function Dashboard() {
     //     }
     // }
 
+    console.log(history);
+    var latestoverall = 0;
+    if (history.length !=0){
+        let sessionId = 0;
+        for (var i=0; i< history.length;i++) {
+            if (history[i].sessionId > sessionId){
+                sessionId = history[i].sessionId;
+            }
+        }
+        const latestsession = history.find(item => item.sessionId == sessionId);
+        latestoverall = latestsession.percent_proper;    
+    }
+
     return (
         <div className={`${styles.main} page`}>
             <section className={`${styles.left}`}>
@@ -64,7 +77,7 @@ export default function Dashboard() {
                 </div>
                 <section className={`${styles.leftcont}`}>
                     <div className={`${styles.cont} rounded`}><Calendar/></div>
-                    <div className={`${styles.cont} ${styles.imgdiv} rounded`}><div className={`${styles.observed} rounded`}><CircProgBar scoreVal={mockOverall1} textVal={"Current Posture Progress"}/><CircProgBar scoreVal={getPercentPropers()} textVal={"Overall Posture Progress"}/></div></div>
+                    <div className={`${styles.cont} ${styles.imgdiv} rounded`}><div className={`${styles.observed} rounded`}><CircProgBar scoreVal={latestoverall} textVal={"Current Posture Progress"}/><CircProgBar scoreVal={getPercentPropers()} textVal={"Overall Posture Progress"}/></div></div>
                     {/* <p>Average Percent Proper (For debug only): {getPercentPropers()}</p>*/}
                 </section>
             </section>
